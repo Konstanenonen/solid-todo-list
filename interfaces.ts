@@ -1,4 +1,5 @@
 interface TodoTask {
+  id: number;
   title: string;
   description: string;
   dueDate: string;
@@ -7,18 +8,18 @@ interface TodoTask {
 }
 
 interface Project {
-  name: string;
-  todoArray: TodoTask[];
+  getName: () => string;
+  getTodos: () => TodoTask[];
   addTodo: (task: TodoTask) => void;
-  deleteTodo: (index: number) => void;
-  toggleStatus: (index: number) => void;
+  deleteTodo: (id: number) => void;
+  toggleTodoStatus: (id: number) => void;
 }
 
 interface ProjectContainer {
   default: Project;
   otherProjects: Project[];
   addProject: (project: Project) => void;
-  deleteProject: (index: number) => void;
+  deleteProject: (id: number) => void;
 }
 
 export { TodoTask, Project, ProjectContainer };
