@@ -19,6 +19,7 @@ interface Project {
 interface ProjectContainer {
   defaultProject: Project;
   otherProjects: Project[];
+  currentProjectId: number;
   addProject: (project: Project) => void;
   deleteProject: (id: number) => void;
   getProjectById: (id: number) => Project;

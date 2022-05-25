@@ -1,7 +1,8 @@
 import { Project } from "../../interfaces";
 import todoTaskView from "./todoTaskView";
+import projectContainer from "./projectContainer";
 
-const projectView = ((taskView) => {
+const projectView = ((taskView, container) => {
   const root = document.getElementById("side-nav");
 
   const createElements = (projects: Project[]) => {
@@ -12,9 +13,10 @@ const projectView = ((taskView) => {
       const projectButton = document.createElement("button");
       projectButton.classList.add("project-button");
       projectButton.innerText = project.getName();
-      projectButton.addEventListener("click", () =>
-        taskView.render(project.getTodos())
-      );
+      projectButton.addEventListener("click", () => {
+        taskView.render(project.getTodos());
+        container.currentProjectId = project.id;
+      });
 
       projectDiv.appendChild(projectButton);
 
@@ -35,6 +37,6 @@ const projectView = ((taskView) => {
   return {
     render,
   };
-})(todoTaskView);
+})(todoTaskView, projectContainer);
 
 export default projectView;
