@@ -9,7 +9,7 @@ const task = createTask(1, "Hei", "Maailma", "24.5.2022", 0, false);
 const task2 = createTask(2, "Hei", "Maailma", "24.5.2022", 0, false);
 const task3 = createTask(3, "Hei", "Maailma", "24.5.2022", 0, false);
 const task4 = createTask(4, "Hei", "Maailma", "24.5.2022", 0, false);
-const project = createProject("Jiit");
+const project = createProject("Jiit", 2);
 
 project.addTodo(task);
 project.addTodo(task2);

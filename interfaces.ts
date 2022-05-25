@@ -8,6 +8,7 @@ interface TodoTask {
 }
 
 interface Project {
+  id: number;
   getName: () => string;
   getTodos: () => TodoTask[];
   addTodo: (task: TodoTask) => void;
@@ -16,10 +17,12 @@ interface Project {
 }
 
 interface ProjectContainer {
-  default: Project;
+  defaultProject: Project;
+  activeProject: Project;
   otherProjects: Project[];
   addProject: (project: Project) => void;
   deleteProject: (id: number) => void;
+  changeActiveProject: (id: number) => void;
 }
 
 export { TodoTask, Project, ProjectContainer };

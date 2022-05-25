@@ -1,6 +1,8 @@
 import { Project, TodoTask } from "../../interfaces";
 
-const projectFactory = (title: string): Project => {
+const projectFactory = (title: string, identification: number): Project => {
+  const id: number = identification;
+  
   const _name: string = title;
   let _todoArray: TodoTask[] = [];
 
@@ -27,6 +29,7 @@ const projectFactory = (title: string): Project => {
   };
 
   return {
+    id,
     getName,
     getTodos,
     addTodo,
