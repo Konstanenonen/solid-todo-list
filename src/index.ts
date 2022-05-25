@@ -8,10 +8,10 @@ import todoTaskView from "./modules/todoTaskView";
 const createTask = todoTaskFactory;
 const createProject = projectFactory;
 
-const task = createTask(1, "Hei", "Maailma", "24.5.2022", 0, false);
-const task2 = createTask(2, "Hei", "Maailma", "24.5.2022", 0, false);
-const task3 = createTask(3, "Hei", "Maailma", "24.5.2022", 0, false);
-const task4 = createTask(4, "Hei", "Maailma", "24.5.2022", 0, false);
+const task = createTask(1, "first", "Maailma", "24.5.2022", 0, false);
+const task2 = createTask(2, "first2", "Maailma", "24.5.2022", 0, false);
+const task3 = createTask(3, "first3", "Maailma", "24.5.2022", 0, false);
+const task4 = createTask(4, "second", "Maailma", "24.5.2022", 0, false);
 const project = createProject("first", 2);
 const project2 = createProject("second", 3);
 const project3 = createProject("third", 4);
