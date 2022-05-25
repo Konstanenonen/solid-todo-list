@@ -18,11 +18,10 @@ interface Project {
 
 interface ProjectContainer {
   defaultProject: Project;
-  activeProject: Project;
   otherProjects: Project[];
   addProject: (project: Project) => void;
   deleteProject: (id: number) => void;
-  changeActiveProject: (id: number) => void;
+  getProjectById: (id: number) => Project;
 }
 
 export { TodoTask, Project, ProjectContainer };
