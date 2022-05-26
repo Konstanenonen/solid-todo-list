@@ -6,22 +6,18 @@ import todoTaskView from "./todoTaskView";
 import { Project } from "../../interfaces";
 
 const appController = ((
-  projectContainer,
-  projectView,
-  projectFactory,
+  container,
+  renderProjects,
+  createProject,
   createTodo,
-  taskView
+  renderTasks
 ) => {
-  const container = projectContainer;
-  const projectViewer = projectView;
-  const createProject = projectFactory;
-
   const addTodoListeners = (project: Project) => {
     const addButton = document.querySelector(".add-task-button");
     addButton.addEventListener("click", () => {
       const todo = createTodo(Date.now(), "testi", "testi", "testi", 1, false);
       project.addTodo(todo);
-      taskView.render(project.getTodos());
+      renderTasks(project.getTodos());
       addTodoListeners(project);
     });
   };
@@ -32,7 +28,7 @@ const appController = ((
     );
     projectButtons.forEach((button, index) => {
       button.addEventListener("click", () => {
-        taskView.render(container.otherProjects[index].getTodos());
+        renderTasks(container.otherProjects[index].getTodos());
         addTodoListeners(container.otherProjects[index]);
       });
     });
@@ -40,13 +36,13 @@ const appController = ((
     const addProjectBtn = document.querySelector(".add-project-button");
     addProjectBtn.addEventListener("click", () => {
       container.addProject(createProject("testi", Date.now()));
-      projectViewer.render(container.otherProjects);
+      renderProjects(container.otherProjects);
       addProjectBtnListeners();
     });
   };
 
   const init = () => {
-    projectView.render(container.otherProjects);
+    renderProjects(container.otherProjects);
     addProjectBtnListeners();
   };
 
@@ -55,10 +51,10 @@ const appController = ((
   };
 })(
   projectContainer,
-  projectView,
+  projectView.render,
   projectFactory,
   todoTaskFactory,
-  todoTaskView
+  todoTaskView.render
 );
 
 export default appController;
