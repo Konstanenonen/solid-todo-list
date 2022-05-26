@@ -4,7 +4,6 @@ import projectFactory from "./projectFactory";
 const projectContainer: ProjectContainer = (() => {
   const defaultProject: Project = projectFactory("default", 1);
   const otherProjects: Project[] = [];
-  const currentProjectId = 1;
 
   const addProject = (project: Project) => {
     otherProjects.push(project);
@@ -31,7 +30,6 @@ const projectContainer: ProjectContainer = (() => {
   return {
     defaultProject,
     otherProjects,
-    currentProjectId,
     addProject,
     deleteProject,
     getProjectById,

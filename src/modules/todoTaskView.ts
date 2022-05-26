@@ -3,6 +3,14 @@ import { TodoTask } from "../../interfaces";
 const todoTaskView = (() => {
   const root = document.getElementById("main");
 
+  const createAddButton = () => {
+    const addButton = document.createElement("button");
+    addButton.classList.add("add-task-button");
+    addButton.innerText = "Add a task";
+
+    return addButton;
+  };
+
   const createElements = (todoArray: TodoTask[]) => {
     const elements = todoArray.map((task) => {
       const todoDiv = document.createElement("div");
@@ -34,6 +42,8 @@ const todoTaskView = (() => {
     elements.forEach((element) => {
       root.appendChild(element);
     });
+    const addButton = createAddButton();
+    root.appendChild(addButton);
   };
 
   return {
