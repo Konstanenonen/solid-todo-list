@@ -12,7 +12,12 @@ const projectView = (() => {
       projectButton.classList.add("project-button");
       projectButton.innerText = project.getName();
 
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("delete-project-button");
+      deleteButton.innerText = "X";
+
       projectDiv.appendChild(projectButton);
+      projectDiv.appendChild(deleteButton);
 
       return projectDiv;
     });

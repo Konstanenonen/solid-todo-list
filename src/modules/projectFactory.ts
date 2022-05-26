@@ -1,7 +1,7 @@
 import { Project, TodoTask } from "../../interfaces";
 
-const projectFactory = (title: string, identification: number): Project => {
-  const id: number = identification;
+const projectFactory = (title: string, identification: string): Project => {
+  const id: string = identification;
   const name: string = title;
   let todoArray: TodoTask[] = [];
 
@@ -13,15 +13,15 @@ const projectFactory = (title: string, identification: number): Project => {
     todoArray.push(task);
   };
 
-  const deleteTodo = (id: number) => {
-    todoArray.length = 0;
+  const deleteTodo = (id: string) => {
     const newTodoArray = todoArray.filter((task) => task.id !== id);
+    todoArray.length = 0;
     newTodoArray.forEach((task) => {
       todoArray.push(task);
     });
   };
 
-  const toggleTodoStatus = (id: number) => {
+  const toggleTodoStatus = (id: string) => {
     todoArray.forEach((task) => {
       if (task.id === id) task.completed = !task.completed;
     });

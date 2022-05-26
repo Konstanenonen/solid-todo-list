@@ -1,14 +1,13 @@
 import { TodoTask } from "../../interfaces";
 
 const todoTaskFactory = (
-  identity: number,
+  identity: string,
   name: string,
   text: string,
   date: string,
   prio: number,
   done: boolean
 ): TodoTask => {
-
   return {
     id: identity,
     title: name,

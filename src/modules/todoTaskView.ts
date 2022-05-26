@@ -24,7 +24,11 @@ const todoTaskView = (() => {
       description.classList.add("todo-text");
       description.innerText = task.description;
 
-      const elementArray = [title, description];
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("delete-task");
+      deleteButton.innerText = "X";
+
+      const elementArray = [title, description, deleteButton];
 
       elementArray.forEach((element) => {
         todoDiv.appendChild(element);
