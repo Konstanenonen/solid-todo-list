@@ -16,11 +16,6 @@ const appController = ((
   const projectViewer = projectView;
   const createProject = projectFactory;
 
-  const init = () => {
-    projectView.render(container.otherProjects);
-    addProjectBtnListeners();
-  };
-
   const addTodoListeners = (project: Project) => {
     const addButton = document.querySelector(".add-task-button");
     addButton.addEventListener("click", () => {
@@ -48,6 +43,11 @@ const appController = ((
       projectViewer.render(container.otherProjects);
       addProjectBtnListeners();
     });
+  };
+
+  const init = () => {
+    projectView.render(container.otherProjects);
+    addProjectBtnListeners();
   };
 
   return {
