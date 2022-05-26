@@ -22,7 +22,13 @@ const appController = ((
     });
   };
 
-  const addProjectBtnListeners = () => {
+  const addProjectListeners = () => {
+    const defaultButton = document.querySelector(".default-project");
+    defaultButton.addEventListener("click", () => {
+      renderTasks(container.defaultProject.getTodos());
+      addTodoListeners(container.defaultProject);
+    });
+
     const projectButtons = Array.from(
       document.querySelectorAll(".project-button")
     );
@@ -37,13 +43,15 @@ const appController = ((
     addProjectBtn.addEventListener("click", () => {
       container.addProject(createProject("testi", Date.now()));
       renderProjects(container.otherProjects);
-      addProjectBtnListeners();
+      addProjectListeners();
     });
   };
 
   const init = () => {
+    renderTasks(container.defaultProject.getTodos());
+    addTodoListeners(container.defaultProject);
     renderProjects(container.otherProjects);
-    addProjectBtnListeners();
+    addProjectListeners();
   };
 
   return {
