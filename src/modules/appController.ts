@@ -16,6 +16,11 @@ const appController = ((
   const projectViewer = projectView;
   const createProject = projectFactory;
 
+  const init = () => {
+    projectView.render(container.otherProjects);
+    addProjectBtnListeners();
+  };
+
   const addTodoListeners = (project: Project) => {
     const addButton = document.querySelector(".add-task-button");
     addButton.addEventListener("click", () => {
@@ -36,16 +41,17 @@ const appController = ((
         addTodoListeners(container.otherProjects[index]);
       });
     });
-  };
 
-  const addProject = (name: string) => {
-    container.addProject(createProject(name, Date.now()));
-    projectViewer.render(container.otherProjects);
-    addProjectBtnListeners();
+    const addProjectBtn = document.querySelector(".add-project-button");
+    addProjectBtn.addEventListener("click", () => {
+      container.addProject(createProject("testi", Date.now()));
+      projectViewer.render(container.otherProjects);
+      addProjectBtnListeners();
+    });
   };
 
   return {
-    addProject,
+    init,
   };
 })(
   projectContainer,

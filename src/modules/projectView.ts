@@ -20,12 +20,22 @@ const projectView = (() => {
     return projectElements;
   };
 
+  const createAddProjectbtn = () => {
+    const addProjectBtn = document.createElement("button");
+    addProjectBtn.classList.add("add-project-button");
+    addProjectBtn.innerText = "Add project";
+
+    return addProjectBtn;
+  };
+
   const render = (projects: Project[]) => {
     root.innerHTML = "";
     const elements = createElements(projects);
     elements.forEach((element) => {
       root.appendChild(element);
     });
+    const addProjectBtn = createAddProjectbtn();
+    root.appendChild(addProjectBtn);
   };
 
   return {
