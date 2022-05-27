@@ -70,7 +70,11 @@ const appController = ((
 
     const addProjectBtn = document.querySelector(".add-project-button");
     addProjectBtn.addEventListener("click", () => {
-      container.addProject(createProject("testi", generateId()));
+      const projectField = document.querySelector(
+        ".project-field"
+      ) as HTMLInputElement;
+      const projectTitle = projectField.value;
+      container.addProject(createProject(projectTitle, generateId()));
       renderProjects(container.otherProjects);
       addProjectListeners();
     });

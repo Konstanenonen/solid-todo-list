@@ -12,6 +12,24 @@
   gap: 10px;
 }
 
+#side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.side-area {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+}
+
 .todo-task {
   display: flex;
   width: 100%;

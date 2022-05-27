@@ -25,6 +25,14 @@ const projectView = (() => {
     return projectElements;
   };
 
+  const createAddProjectField = () => {
+    const addProjectField = document.createElement("input");
+    addProjectField.type = "text";
+    addProjectField.classList.add("project-field");
+
+    return addProjectField;
+  };
+
   const createAddProjectbtn = () => {
     const addProjectBtn = document.createElement("button");
     addProjectBtn.classList.add("add-project-button");
@@ -39,7 +47,9 @@ const projectView = (() => {
     elements.forEach((element) => {
       root.appendChild(element);
     });
+    const projectField = createAddProjectField();
     const addProjectBtn = createAddProjectbtn();
+    root.appendChild(projectField);
     root.appendChild(addProjectBtn);
   };
 
