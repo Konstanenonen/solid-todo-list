@@ -18,7 +18,11 @@ const appController = ((
     const addButton = document.querySelector(".add-task-button");
     addButton.addEventListener("click", () => {
       const taskId = generateId();
-      const todo = createTodo(taskId, "testi", "testi", "testi", 1, false);
+      const taskField = document.querySelector(
+        ".task-field"
+      ) as HTMLInputElement;
+      const taskTitle = taskField.value;
+      const todo = createTodo(taskId, taskTitle, "testi", "testi", 1, false);
       project.addTodo(todo);
       renderTasks(project.getTodos());
       addTodoListeners(project);

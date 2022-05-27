@@ -11,6 +11,14 @@ const todoTaskView = (() => {
     return addButton;
   };
 
+  const createAddField = () => {
+    const addField = document.createElement("input");
+    addField.type = "text";
+    addField.classList.add("task-field");
+
+    return addField;
+  };
+
   const createElements = (todoArray: TodoTask[]) => {
     const elements = todoArray.map((task) => {
       const todoDiv = document.createElement("div");
@@ -47,7 +55,9 @@ const todoTaskView = (() => {
       root.appendChild(element);
     });
     const addButton = createAddButton();
+    const addField = createAddField();
     root.appendChild(addButton);
+    root.appendChild(addField);
   };
 
   return {
