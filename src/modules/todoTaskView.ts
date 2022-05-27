@@ -56,8 +56,8 @@ const todoTaskView = (() => {
     });
     const addButton = createAddButton();
     const addField = createAddField();
-    root.appendChild(addButton);
     root.appendChild(addField);
+    root.appendChild(addButton);
   };
 
   return {
