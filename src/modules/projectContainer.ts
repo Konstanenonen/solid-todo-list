@@ -2,7 +2,7 @@ import { Project, ProjectContainer } from "../../interfaces";
 import projectFactory from "./projectFactory";
 
 const projectContainer: ProjectContainer = (() => {
-  const defaultProject: Project = projectFactory("default", "default");
+  const defaultProject: Project = projectFactory("Default Project", "default");
   const otherProjects: Project[] = [];
 
   const addProject = (project: Project) => {
