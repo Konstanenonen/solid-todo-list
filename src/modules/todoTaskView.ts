@@ -22,21 +22,22 @@ const todoTaskView = (() => {
   const createElements = (todoArray: TodoTask[]) => {
     const elements = todoArray.map((task) => {
       const todoDiv = document.createElement("div");
+      todoDiv.id = task.id;
       todoDiv.classList.add("todo-task");
 
-      const title = document.createElement("h2");
+      const title = document.createElement("h3");
       title.classList.add("todo-title");
       title.innerText = task.title;
 
-      const description = document.createElement("p");
-      description.classList.add("todo-text");
-      description.innerText = task.description;
+      const expandButton = document.createElement("button");
+      expandButton.classList.add("expand-task");
+      expandButton.innerText = "Expand";
 
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("delete-task");
       deleteButton.innerText = "X";
 
-      const elementArray = [title, description, deleteButton];
+      const elementArray = [title, expandButton, deleteButton];
 
       elementArray.forEach((element) => {
         todoDiv.appendChild(element);
@@ -46,6 +47,30 @@ const todoTaskView = (() => {
     });
 
     return elements;
+  };
+
+  const expandTask = (todoTask: TodoTask) => {
+    const todoElement = document.getElementById(todoTask.id);
+    todoElement.classList.remove("todo-task");
+    todoElement.classList.add("todo-task-expanded");
+    todoElement.innerHTML = "";
+
+    const title = document.createElement("h3");
+    title.classList.add("todo-title");
+    title.innerText = todoTask.title;
+
+    const description = document.createElement("p");
+    description.classList.add("todo-description");
+    description.innerText = todoTask.description;
+
+    const dueDate = document.createElement("p");
+    dueDate.classList.add("todo-date");
+    dueDate.innerText = todoTask.dueDate;
+
+    const elementArray = [title, description, dueDate];
+    elementArray.forEach((element) => {
+      todoElement.appendChild(element);
+    });
   };
 
   const render = (todoArray: TodoTask[]) => {
@@ -61,6 +86,7 @@ const todoTaskView = (() => {
   };
 
   return {
+    expandTask,
     render,
   };
 })();

@@ -13,6 +13,7 @@ const appController = ((
   createTodo,
   renderTasks,
   renderProjectTitle,
+  expandTodo,
   generateId
 ) => {
   const addTodoListeners = (project: Project) => {
@@ -23,10 +24,24 @@ const appController = ((
         ".task-field"
       ) as HTMLInputElement;
       const taskTitle = taskField.value;
-      const todo = createTodo(taskId, taskTitle, "testi", "testi", 1, false);
+      const todo = createTodo(
+        taskId,
+        taskTitle,
+        "testi",
+        "Päivämäärä",
+        1,
+        false
+      );
       project.addTodo(todo);
       renderTasks(project.getTodos());
       addTodoListeners(project);
+    });
+
+    const expandButtons = Array.from(document.querySelectorAll(".expand-task"));
+    expandButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        expandTodo(project.getTodos()[index]);
+      });
     });
 
     const deleteButtons = Array.from(document.querySelectorAll(".delete-task"));
@@ -101,6 +116,7 @@ const appController = ((
   todoTaskFactory,
   todoTaskView.render,
   projectView.createNavTitle,
+  todoTaskView.expandTask,
   makeId
 );
 
