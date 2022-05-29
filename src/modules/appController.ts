@@ -16,6 +16,18 @@ const appController = ((
   expandTodo,
   generateId
 ) => {
+  const addMinimizeListeners = (project: Project) => {
+    const minimizeButtons = Array.from(
+      document.querySelectorAll(".minimize-button")
+    );
+    minimizeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        renderTasks(project.getTodos());
+        addTodoListeners(project);
+      });
+    });
+  };
+
   const addTodoListeners = (project: Project) => {
     const addButton = document.querySelector(".add-task-button");
     addButton.addEventListener("click", () => {
@@ -41,6 +53,7 @@ const appController = ((
     expandButtons.forEach((button, index) => {
       button.addEventListener("click", () => {
         expandTodo(project.getTodos()[index]);
+        addMinimizeListeners(project);
       });
     });
 

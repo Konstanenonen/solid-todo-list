@@ -57,17 +57,36 @@ const todoTaskView = (() => {
 
     const title = document.createElement("h3");
     title.classList.add("todo-title");
-    title.innerText = todoTask.title;
+    title.innerText = `Title: ${todoTask.title}`;
 
     const description = document.createElement("p");
     description.classList.add("todo-description");
-    description.innerText = todoTask.description;
+    description.innerText = `Description: ${todoTask.description}`;
 
     const dueDate = document.createElement("p");
     dueDate.classList.add("todo-date");
-    dueDate.innerText = todoTask.dueDate;
+    dueDate.innerText = `Due date: ${todoTask.dueDate}`;
 
-    const elementArray = [title, description, dueDate];
+    const priority = document.createElement("p");
+    priority.classList.add("todo-priority");
+    priority.innerText = `Priority: ${todoTask.priority}`;
+
+    const status = document.createElement("p");
+    status.classList.add("todo-status");
+    status.innerText = `Status: ${todoTask.completed}`;
+
+    const minimize = document.createElement("button");
+    minimize.classList.add("minimize-button");
+    minimize.innerText = "Minimize";
+
+    const elementArray = [
+      title,
+      description,
+      dueDate,
+      priority,
+      status,
+      minimize,
+    ];
     elementArray.forEach((element) => {
       todoElement.appendChild(element);
     });
