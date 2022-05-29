@@ -12,6 +12,7 @@ const appController = ((
   createProject,
   createTodo,
   renderTasks,
+  renderProjectTitle,
   generateId
 ) => {
   const addTodoListeners = (project: Project) => {
@@ -43,6 +44,7 @@ const appController = ((
     const defaultButton = document.querySelector(".default-project");
     defaultButton.addEventListener("click", () => {
       renderTasks(container.defaultProject.getTodos());
+      renderProjectTitle(container.defaultProject);
       addTodoListeners(container.defaultProject);
     });
 
@@ -52,6 +54,7 @@ const appController = ((
     projectButtons.forEach((button, index) => {
       button.addEventListener("click", () => {
         renderTasks(container.otherProjects[index].getTodos());
+        renderProjectTitle(container.otherProjects[index]);
         addTodoListeners(container.otherProjects[index]);
       });
     });
@@ -84,6 +87,7 @@ const appController = ((
     renderTasks(container.defaultProject.getTodos());
     addTodoListeners(container.defaultProject);
     renderProjects(container.otherProjects);
+    renderProjectTitle(container.defaultProject);
     addProjectListeners();
   };
 
@@ -96,6 +100,7 @@ const appController = ((
   projectFactory,
   todoTaskFactory,
   todoTaskView.render,
+  projectView.createNavTitle,
   makeId
 );
 

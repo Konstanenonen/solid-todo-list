@@ -2,6 +2,7 @@ import { Project } from "../../interfaces";
 
 const projectView = (() => {
   const root = document.getElementById("side-nav");
+  const topNav = document.getElementById("project-title-area");
 
   const createElements = (projects: Project[]) => {
     const projectElements = projects.map((project) => {
@@ -41,6 +42,14 @@ const projectView = (() => {
     return addProjectBtn;
   };
 
+  const createNavTitle = (project: Project) => {
+    topNav.innerHTML = "";
+    const navTitle = document.createElement("h2");
+    navTitle.classList.add("project-nav-title");
+    navTitle.innerText = project.getName();
+    topNav.appendChild(navTitle);
+  };
+
   const render = (projects: Project[]) => {
     root.innerHTML = "";
     const elements = createElements(projects);
@@ -54,6 +63,7 @@ const projectView = (() => {
   };
 
   return {
+    createNavTitle,
     render,
   };
 })();

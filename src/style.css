@@ -1,10 +1,31 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 #root {
-  display: flex;
-  justify-content: center;
+  height: 100%;
+  display: grid;
+  grid:
+    "top-nav top-nav" 100px
+    "side-nav main" 1fr
+    "footer footer" 100px
+    / 300px 1fr;
 }
 
 #main {
-  flex: 1;
+  grid-area: main;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +39,20 @@
   gap: 10px;
 }
 
+.top-nav {
+  grid-area: top-nav;
+  display: flex;
+}
+
+#project-title-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .side-area {
+  grid-area: side-nav;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -39,4 +73,8 @@
 .todo-text {
   flex: 1;
   text-align: center;
+}
+
+.footer {
+  grid-area: footer;
 }
