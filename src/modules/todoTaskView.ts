@@ -14,7 +14,7 @@ const todoTaskView = (() => {
   const createAddForm = () => {
     const titleLabel = document.createElement("label");
     titleLabel.htmlFor = "task-title-field";
-    titleLabel.innerText = "Title: ";
+    titleLabel.innerText = "Title:";
 
     const titleField = document.createElement("input");
     titleField.type = "text";
@@ -23,12 +23,38 @@ const todoTaskView = (() => {
 
     const descriptionLabel = document.createElement("label");
     descriptionLabel.htmlFor = "task-description-field";
-    descriptionLabel.innerText = "Description: ";
+    descriptionLabel.innerText = "Description:";
 
     const descriptionField = document.createElement("input");
     descriptionField.type = "text";
     descriptionField.classList.add("task-description-field");
     descriptionField.id = "task-description-field";
+
+    const dateLabel = document.createElement("label");
+    dateLabel.htmlFor = "task-date-field";
+    dateLabel.innerText = "Due date:";
+
+    const dateField = document.createElement("input");
+    dateField.type = "date";
+    dateField.classList.add("task-date-field");
+    dateField.id = "task-date-field";
+
+    const priorityFieldset = document.createElement("fieldset");
+    priorityFieldset.innerHTML = `<legend>Priority:</legend>
+    <div>
+      <input type="radio" id="priorityChoice1"
+       name="priority" value="High" checked>
+      <label for="contactChoice1">High</label>
+
+      <input type="radio" id="priorityChoice2"
+       name="priority" value="Medium">
+      <label for="contactChoice2">Medium</label>
+
+      <input type="radio" id="priorityChoice3"
+       name="priority" value="Low">
+      <label for="contactChoice3">Low</label>
+    </div>
+  </fieldset>`;
 
     const taskForm = document.createElement("form");
     taskForm.classList.add("task-form");
@@ -38,6 +64,9 @@ const todoTaskView = (() => {
       titleField,
       descriptionLabel,
       descriptionField,
+      dateLabel,
+      dateField,
+      priorityFieldset,
     ];
     elementArray.forEach((element) => {
       taskForm.appendChild(element);

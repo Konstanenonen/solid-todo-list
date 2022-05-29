@@ -40,12 +40,24 @@ const appController = ((
         ".task-description-field"
       ) as HTMLInputElement;
       const taskDescription = descriptionField.value;
+      const dateField = document.querySelector(
+        ".task-date-field"
+      ) as HTMLInputElement;
+      const taskDueDate = dateField.value;
+      let priority;
+      const radioButtons = Array.from(
+        document.querySelectorAll("input[type=radio]")
+      ) as HTMLInputElement[];
+      radioButtons.forEach((radio) => {
+        if (radio.checked) priority = radio.value;
+      });
+
       const todo = createTodo(
         taskId,
         taskTitle,
         taskDescription,
-        "Päivämäärä",
-        "High"
+        taskDueDate,
+        priority
       );
       project.addTodo(todo);
       renderTasks(project.getTodos());
