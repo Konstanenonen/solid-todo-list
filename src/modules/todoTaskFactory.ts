@@ -5,8 +5,7 @@ const todoTaskFactory = (
   name: string,
   text: string,
   date: string,
-  prio: number,
-  done: boolean
+  prio: "Low" | "Medium" | "High"
 ): TodoTask => {
   return {
     id: identity,
@@ -14,7 +13,6 @@ const todoTaskFactory = (
     description: text,
     dueDate: date,
     priority: prio,
-    completed: done,
   };
 };
 

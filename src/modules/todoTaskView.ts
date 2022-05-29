@@ -11,12 +11,39 @@ const todoTaskView = (() => {
     return addButton;
   };
 
-  const createAddField = () => {
-    const addField = document.createElement("input");
-    addField.type = "text";
-    addField.classList.add("task-field");
+  const createAddForm = () => {
+    const titleLabel = document.createElement("label");
+    titleLabel.htmlFor = "task-title-field";
+    titleLabel.innerText = "Title: ";
 
-    return addField;
+    const titleField = document.createElement("input");
+    titleField.type = "text";
+    titleField.classList.add("task-field");
+    titleField.id = "task-title-field";
+
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.htmlFor = "task-description-field";
+    descriptionLabel.innerText = "Description: ";
+
+    const descriptionField = document.createElement("input");
+    descriptionField.type = "text";
+    descriptionField.classList.add("task-description-field");
+    descriptionField.id = "task-description-field";
+
+    const taskForm = document.createElement("form");
+    taskForm.classList.add("task-form");
+
+    const elementArray = [
+      titleLabel,
+      titleField,
+      descriptionLabel,
+      descriptionField,
+    ];
+    elementArray.forEach((element) => {
+      taskForm.appendChild(element);
+    });
+
+    return taskForm;
   };
 
   const createElements = (todoArray: TodoTask[]) => {
@@ -71,22 +98,11 @@ const todoTaskView = (() => {
     priority.classList.add("todo-priority");
     priority.innerText = `Priority: ${todoTask.priority}`;
 
-    const status = document.createElement("p");
-    status.classList.add("todo-status");
-    status.innerText = `Status: ${todoTask.completed}`;
-
     const minimize = document.createElement("button");
     minimize.classList.add("minimize-button");
     minimize.innerText = "Minimize";
 
-    const elementArray = [
-      title,
-      description,
-      dueDate,
-      priority,
-      status,
-      minimize,
-    ];
+    const elementArray = [title, description, dueDate, priority, minimize];
     elementArray.forEach((element) => {
       todoElement.appendChild(element);
     });
@@ -98,9 +114,9 @@ const todoTaskView = (() => {
     elements.forEach((element) => {
       root.appendChild(element);
     });
+    const addForm = createAddForm();
     const addButton = createAddButton();
-    const addField = createAddField();
-    root.appendChild(addField);
+    root.appendChild(addForm);
     root.appendChild(addButton);
   };
 

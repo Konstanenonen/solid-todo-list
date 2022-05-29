@@ -3,8 +3,7 @@ interface TodoTask {
   title: string;
   description: string;
   dueDate: string;
-  priority: number;
-  completed: boolean;
+  priority: "Low" | "Medium" | "High";
 }
 
 interface Project {
@@ -13,7 +12,6 @@ interface Project {
   getTodos: () => TodoTask[];
   addTodo: (task: TodoTask) => void;
   deleteTodo: (id: string) => void;
-  toggleTodoStatus: (id: string) => void;
 }
 
 interface ProjectContainer {

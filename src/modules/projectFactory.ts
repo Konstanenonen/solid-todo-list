@@ -21,19 +21,12 @@ const projectFactory = (title: string, identification: string): Project => {
     });
   };
 
-  const toggleTodoStatus = (id: string) => {
-    todoArray.forEach((task) => {
-      if (task.id === id) task.completed = !task.completed;
-    });
-  };
-
   return {
     id,
     getName,
     getTodos,
     addTodo,
     deleteTodo,
-    toggleTodoStatus,
   };
 };
 

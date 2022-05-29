@@ -36,13 +36,16 @@ const appController = ((
         ".task-field"
       ) as HTMLInputElement;
       const taskTitle = taskField.value;
+      const descriptionField = document.querySelector(
+        ".task-description-field"
+      ) as HTMLInputElement;
+      const taskDescription = descriptionField.value;
       const todo = createTodo(
         taskId,
         taskTitle,
-        "testi",
+        taskDescription,
         "Päivämäärä",
-        1,
-        false
+        "High"
       );
       project.addTodo(todo);
       renderTasks(project.getTodos());

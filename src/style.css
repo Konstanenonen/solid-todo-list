@@ -105,6 +105,14 @@ body {
   font-size: 1.2rem;
 }
 
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid blue;
+  padding: 10px;
+}
+
 .footer {
   grid-area: footer;
   display: flex;
