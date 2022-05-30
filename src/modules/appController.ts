@@ -3,7 +3,7 @@ import projectFactory from "./projectFactory";
 import todoTaskFactory from "./todoTaskFactory";
 import projectView from "./projectView";
 import todoTaskView from "./todoTaskView";
-import { Project, TodoTask } from "../../interfaces";
+import { TodoTask } from "../../interfaces";
 import makeId from "./makeId";
 
 const appController = ((
@@ -168,7 +168,17 @@ const appController = ((
       button.addEventListener("click", () => {
         const todo = currentProject.getTodos()[index];
         expandTodo(todo);
+        activateMinimizeTaskButtons();
       });
+    });
+  };
+
+  const activateMinimizeTaskButtons = () => {
+    const minimizeButton = Array.from(
+      document.querySelectorAll(".minimize-button")
+    );
+    minimizeButton.forEach((button) => {
+      button.addEventListener("click", renderCurrentTasks);
     });
   };
 
