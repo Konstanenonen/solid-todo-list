@@ -115,18 +115,26 @@ const appController = ((
       const dateField = document.getElementById(
         "task-date-field"
       ) as HTMLInputElement;
+      const radioButtons = Array.from(
+        document.querySelectorAll("input[type=radio]")
+      ) as HTMLInputElement[];
 
       const taskId = makeId();
       const taskTitle = titleField.value;
       const taskDescription = descriptionField.value;
       const taskDate = dateField.value;
+      let taskPriority: "Low" | "Medium" | "High" = "High";
+      radioButtons.forEach((button) => {
+        if (button.checked)
+          taskPriority = button.value as "Low" | "Medium" | "High";
+      });
 
       const newTask = createTodo(
         taskId,
         taskTitle,
         taskDescription,
         taskDate,
-        "High"
+        taskPriority
       );
       addNewTask(newTask);
     });
