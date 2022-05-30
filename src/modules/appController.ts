@@ -36,15 +36,16 @@ const appController = ((
   };
 
   const addNewProject = (name: string) => {
-    console.log(name);
     const newProject = createProject(name, generateId());
     container.addProject(newProject);
     renderCurrentProjects();
+    saveToLocalStorage();
   };
 
   const addNewTask = (task: TodoTask) => {
     currentProject.addTodo(task);
     renderCurrentTasks();
+    saveToLocalStorage();
   };
 
   const switchProject = (index: number | "default") => {
@@ -66,11 +67,13 @@ const appController = ((
     const projectDeleteId = container.otherProjects[index].id;
     container.deleteProject(projectDeleteId);
     renderCurrentProjects();
+    saveToLocalStorage();
   };
 
   const deleteTask = (id: string) => {
     currentProject.deleteTodo(id);
     renderCurrentTasks();
+    saveToLocalStorage();
   };
 
   const activateDefaultButton = () => {
@@ -182,7 +185,54 @@ const appController = ((
     });
   };
 
+  const saveToLocalStorage = () => {
+    const defaultTodos = container.defaultProject.getTodos();
+    const jsonDefaultTodos = JSON.stringify(defaultTodos);
+    localStorage.setItem("default-todos", jsonDefaultTodos);
+
+    const otherProjects: object[] = [];
+    container.otherProjects.forEach((project) => {
+      const projectObject = {
+        name: project.getName(),
+        tasks: project.getTodos(),
+        id: project.id,
+      };
+      otherProjects.push(projectObject);
+    });
+
+    const jsonOtherProjects = JSON.stringify(otherProjects);
+    localStorage.setItem("other-projects", jsonOtherProjects);
+  };
+
+  const fetchFromLocalStorage = () => {
+    const defaultTodos: TodoTask[] = JSON.parse(
+      localStorage.getItem("default-todos")
+    );
+
+    if (defaultTodos === null) return;
+
+    defaultTodos.forEach((todo) => {
+      container.defaultProject.addTodo(todo);
+    });
+
+    const otherProjects: object[] = JSON.parse(
+      localStorage.getItem("other-projects")
+    );
+    if (otherProjects === null) return;
+
+    otherProjects.forEach(
+      (project: { name: string; tasks: TodoTask[]; id: string }) => {
+        const newProject = createProject(project.name, project.id);
+        project.tasks.forEach((task) => {
+          newProject.addTodo(task);
+        });
+        container.addProject(newProject);
+      }
+    );
+  };
+
   const start = () => {
+    fetchFromLocalStorage();
     renderCurrentProjects();
     renderCurrentTasks();
   };
