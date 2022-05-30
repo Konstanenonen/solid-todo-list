@@ -23,6 +23,7 @@ const appController = ((
     renderTasks(currentProject.getTodos());
     activateAddTaskButton();
     activateDeleteTaskButtons();
+    activateExpandTaskButtons();
   };
 
   const renderCurrentProjects = () => {
@@ -149,6 +150,16 @@ const appController = ((
       button.addEventListener("click", () => {
         const taskId = tasks[index].id;
         deleteTask(taskId);
+      });
+    });
+  };
+
+  const activateExpandTaskButtons = () => {
+    const expandButtons = Array.from(document.querySelectorAll(".expand-task"));
+    expandButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const todo = currentProject.getTodos()[index];
+        expandTodo(todo);
       });
     });
   };
