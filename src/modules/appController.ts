@@ -3,7 +3,7 @@ import projectFactory from "./projectFactory";
 import todoTaskFactory from "./todoTaskFactory";
 import projectView from "./projectView";
 import todoTaskView from "./todoTaskView";
-import { Project } from "../../interfaces";
+import { Project, TodoTask } from "../../interfaces";
 import makeId from "./makeId";
 
 const appController = ((
@@ -16,126 +16,150 @@ const appController = ((
   expandTodo,
   generateId
 ) => {
-  const addMinimizeListeners = (project: Project) => {
-    const minimizeButtons = Array.from(
-      document.querySelectorAll(".minimize-button")
+  let currentProject = container.defaultProject;
+
+  const renderCurrentTasks = () => {
+    renderProjectTitle(currentProject);
+    renderTasks(currentProject.getTodos());
+    activateAddTaskButton();
+    activateDeleteTaskButtons();
+  };
+
+  const renderCurrentProjects = () => {
+    renderProjects(container.otherProjects);
+    renderProjectTitle(currentProject);
+    activateProjectButton();
+    activateDefaultButton();
+    activateOtherProjectButtons();
+    activateDeleteProjectButtons();
+  };
+
+  const addNewProject = (name: string) => {
+    console.log(name);
+    const newProject = createProject(name, generateId());
+    container.addProject(newProject);
+    renderCurrentProjects();
+  };
+
+  const addNewTask = (task: TodoTask) => {
+    currentProject.addTodo(task);
+    renderCurrentTasks();
+  };
+
+  const switchProject = (index: number | "default") => {
+    if (index === "default") {
+      currentProject = container.defaultProject;
+      typeof index === "number";
+    } else if (typeof index === "number") {
+      currentProject = container.otherProjects[index];
+    }
+
+    renderCurrentTasks();
+  };
+
+  const deleteProject = (index: number) => {
+    if (currentProject.id === container.otherProjects[index].id) {
+      switchProject("default");
+    }
+
+    const projectDeleteId = container.otherProjects[index].id;
+    container.deleteProject(projectDeleteId);
+    renderCurrentProjects();
+  };
+
+  const deleteTask = (id: string) => {
+    currentProject.deleteTodo(id);
+    renderCurrentTasks();
+  };
+
+  const activateDefaultButton = () => {
+    const defaultButton = document.querySelector(".default-project");
+    defaultButton.addEventListener("click", () => {
+      switchProject("default");
+    });
+  };
+
+  const activateOtherProjectButtons = () => {
+    const otherButtonsArray = Array.from(
+      document.querySelectorAll(".project-button")
     );
-    minimizeButtons.forEach((button) => {
+    otherButtonsArray.forEach((button, index) => {
       button.addEventListener("click", () => {
-        renderTasks(project.getTodos());
-        addTodoListeners(project);
+        switchProject(index);
       });
     });
   };
 
-  const addTodoListeners = (project: Project) => {
-    const addButton = document.querySelector(".add-task-button");
-    addButton.addEventListener("click", () => {
-      const taskId = generateId();
-      const taskField = document.querySelector(
-        ".task-field"
+  const activateProjectButton = () => {
+    const projectButton = document.querySelector(".add-project-button");
+    projectButton.addEventListener("click", () => {
+      const projectField = document.querySelector(
+        ".project-field"
       ) as HTMLInputElement;
-      const taskTitle = taskField.value;
-      const descriptionField = document.querySelector(
-        ".task-description-field"
-      ) as HTMLInputElement;
-      const taskDescription = descriptionField.value;
-      const dateField = document.querySelector(
-        ".task-date-field"
-      ) as HTMLInputElement;
-      const taskDueDate = dateField.value;
-      let priority;
-      const radioButtons = Array.from(
-        document.querySelectorAll("input[type=radio]")
-      ) as HTMLInputElement[];
-      radioButtons.forEach((radio) => {
-        if (radio.checked) priority = radio.value;
-      });
+      const projectName = projectField.value;
+      addNewProject(projectName);
+    });
+  };
 
-      const todo = createTodo(
+  const activateAddTaskButton = () => {
+    const addTaskButton = document.querySelector(".add-task-button");
+
+    addTaskButton.addEventListener("click", () => {
+      const titleField = document.getElementById(
+        "task-title-field"
+      ) as HTMLInputElement;
+      const descriptionField = document.getElementById(
+        "task-description-field"
+      ) as HTMLInputElement;
+      const dateField = document.getElementById(
+        "task-date-field"
+      ) as HTMLInputElement;
+
+      const taskId = makeId();
+      const taskTitle = titleField.value;
+      const taskDescription = descriptionField.value;
+      const taskDate = dateField.value;
+
+      const newTask = createTodo(
         taskId,
         taskTitle,
         taskDescription,
-        taskDueDate,
-        priority
+        taskDate,
+        "High"
       );
-      project.addTodo(todo);
-      renderTasks(project.getTodos());
-      addTodoListeners(project);
-    });
-
-    const expandButtons = Array.from(document.querySelectorAll(".expand-task"));
-    expandButtons.forEach((button, index) => {
-      button.addEventListener("click", () => {
-        expandTodo(project.getTodos()[index]);
-        addMinimizeListeners(project);
-      });
-    });
-
-    const deleteButtons = Array.from(document.querySelectorAll(".delete-task"));
-    deleteButtons.forEach((button, index) => {
-      button.addEventListener("click", () => {
-        const todoId = project.getTodos()[index].id;
-        project.deleteTodo(todoId);
-        renderTasks(project.getTodos());
-        addTodoListeners(project);
-      });
+      addNewTask(newTask);
     });
   };
 
-  const addProjectListeners = () => {
-    const defaultButton = document.querySelector(".default-project");
-    defaultButton.addEventListener("click", () => {
-      renderTasks(container.defaultProject.getTodos());
-      renderProjectTitle(container.defaultProject);
-      addTodoListeners(container.defaultProject);
-    });
-
-    const projectButtons = Array.from(
-      document.querySelectorAll(".project-button")
-    );
-    projectButtons.forEach((button, index) => {
-      button.addEventListener("click", () => {
-        renderTasks(container.otherProjects[index].getTodos());
-        renderProjectTitle(container.otherProjects[index]);
-        addTodoListeners(container.otherProjects[index]);
-      });
-    });
-
+  const activateDeleteProjectButtons = () => {
     const deleteButtons = Array.from(
       document.querySelectorAll(".delete-project-button")
     );
     deleteButtons.forEach((button, index) => {
       button.addEventListener("click", () => {
-        const projectId = container.otherProjects[index].id;
-        container.deleteProject(projectId);
-        renderProjects(container.otherProjects);
-        addProjectListeners();
+        deleteProject(index);
       });
-    });
-
-    const addProjectBtn = document.querySelector(".add-project-button");
-    addProjectBtn.addEventListener("click", () => {
-      const projectField = document.querySelector(
-        ".project-field"
-      ) as HTMLInputElement;
-      const projectTitle = projectField.value;
-      container.addProject(createProject(projectTitle, generateId()));
-      renderProjects(container.otherProjects);
-      addProjectListeners();
     });
   };
 
-  const init = () => {
-    renderTasks(container.defaultProject.getTodos());
-    addTodoListeners(container.defaultProject);
-    renderProjects(container.otherProjects);
-    renderProjectTitle(container.defaultProject);
-    addProjectListeners();
+  const activateDeleteTaskButtons = () => {
+    const deleteButtons = Array.from(document.querySelectorAll(".delete-task"));
+    const tasks = Array.from(document.querySelectorAll(".todo-task"));
+    deleteButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const taskId = tasks[index].id;
+        deleteTask(taskId);
+      });
+    });
+  };
+
+  const start = () => {
+    renderCurrentProjects();
+    renderCurrentTasks();
   };
 
   return {
-    init,
+    start,
   };
 })(
   projectContainer,
