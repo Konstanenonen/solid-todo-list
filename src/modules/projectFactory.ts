@@ -14,11 +14,7 @@ const projectFactory = (title: string, identification: string): Project => {
   };
 
   const deleteTodo = (id: string) => {
-    const newTodoArray = todoArray.filter((task) => task.id !== id);
-    todoArray.length = 0;
-    newTodoArray.forEach((task) => {
-      todoArray.push(task);
-    });
+    todoArray = todoArray.filter((task) => task.id !== id);
   };
 
   return {
