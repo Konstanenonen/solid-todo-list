@@ -11,6 +11,7 @@ const projectView = (() => {
 
       const projectButton = document.createElement("button");
       projectButton.classList.add("project-button");
+      projectButton.classList.add("button");
       projectButton.innerText = project.getName();
 
       const deleteButton = document.createElement("button");
@@ -37,6 +38,7 @@ const projectView = (() => {
   const createAddProjectbtn = () => {
     const addProjectBtn = document.createElement("button");
     addProjectBtn.classList.add("add-project-button");
+    addProjectBtn.classList.add("button");
     addProjectBtn.innerText = "Add project";
 
     return addProjectBtn;

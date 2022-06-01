@@ -6,6 +6,7 @@ const todoTaskView = (() => {
   const createAddButton = () => {
     const addButton = document.createElement("button");
     addButton.classList.add("add-task-button");
+    addButton.classList.add("button");
     addButton.innerText = "Add a task";
 
     return addButton;
@@ -87,6 +88,7 @@ const todoTaskView = (() => {
 
       const expandButton = document.createElement("button");
       expandButton.classList.add("expand-task");
+      expandButton.classList.add("button");
       expandButton.innerText = "Expand";
 
       const deleteButton = document.createElement("button");
@@ -129,6 +131,7 @@ const todoTaskView = (() => {
 
     const minimize = document.createElement("button");
     minimize.classList.add("minimize-button");
+    minimize.classList.add("button");
     minimize.innerText = "Minimize";
 
     const elementArray = [title, description, dueDate, priority, minimize];

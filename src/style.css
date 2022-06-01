@@ -16,6 +16,42 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.button {
+  background-color: rgb(192, 231, 192);
+  border-radius: 5px;
+  border: 1px solid rgb(98, 157, 93);
+  font-size: 1.1rem;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(36, 122, 50);
+}
+
+.delete-project-button {
+  background-color: rgb(237, 116, 116);
+  border-radius: 5px;
+  border: 1px solid rgb(96, 15, 15);
+  font-size: 1.1rem;
+}
+
+.delete-project-button:hover {
+  cursor: pointer;
+  background-color: rgb(96, 15, 15);
+}
+
+.delete-task {
+  background-color: rgb(237, 116, 116);
+  border-radius: 5px;
+  border: 1px solid rgb(96, 15, 15);
+  font-size: 1.1rem;
+}
+
+.delete-task:hover {
+  cursor: pointer;
+  background-color: rgb(96, 15, 15);
+}
+
 #root {
   height: 100%;
   display: grid;
@@ -91,13 +127,13 @@ body {
 
 .todo-task-expanded {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   background-color: #184e77;
   padding: 5px;
   color: white;
   width: 100%;
-  align-items: flex-start;
 }
 
 .todo-title {
@@ -106,11 +142,18 @@ body {
 }
 
 .task-form {
+  font-size: 1.2rem;
+  background-color: #1a759f;
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  border: 1px solid blue;
   padding: 10px;
+}
+
+.task-form > label,
+fieldset {
+  margin-top: 10px;
 }
 
 .footer {
